@@ -1,20 +1,9 @@
 from django.db import models
+from ciudad import Ciudad
+from sector import Sector
+from direccion import Direccion
 
-# Create your models here.
 
-
-class Ciudad(models.Model):
-    def __str__(self):
-        return 
-
-class Direccion(models.Model):
-    def __str__(self):
-        return 
-
-class Sector(models.Model):
-    def __str__(self):
-        return 
-    
 class Inmueble(models.Model):
     idInmueble = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
