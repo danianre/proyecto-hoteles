@@ -100,14 +100,18 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '5432',
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'BaseDeDatosInmobiliaria',
+        'USER': 'administrador',
+        'PASSWORD': 'BD_semillero_2023',
+        'HOST': 'server-bds.database.windows.net',
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+        },
+    },
 }
+
 
 
 # Password validation
