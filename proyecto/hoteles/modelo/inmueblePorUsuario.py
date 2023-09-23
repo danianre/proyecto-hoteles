@@ -1,6 +1,6 @@
 from django.db import models
-from usuario import Usuario
-from inmueble import Inmueble
+from proyecto.hoteles.modelo.usuario import Usuario
+from proyecto.hoteles.modelo.inmueble import Inmueble
 
 
 class inmueblePorUsuario(models.Model):

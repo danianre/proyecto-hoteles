@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Dirección(models.Model):
+class Direccion(models.Model):
     idDirección = models.AutoField(primary_key=True)
     sufijo = models.CharField(max_length=100)
     numero = models.IntegerField()

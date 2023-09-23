@@ -1,5 +1,5 @@
 from django.db import models
-from tipoDeCaracteristica import TipoDeCaracteristica
+from proyecto.hoteles.modelo.tipoDeCaracteristica import TipoDeCaracteristica
 
 class Caracteristica(models.Model):
     idCaracteristicas = models.AutoField(primary_key=True)
