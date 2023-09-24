@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from proyecto.hoteles.modelo import DataSource
+from django.contrib.auth import get_user_model
 
 
 class Usuario(models.Model):
@@ -17,74 +18,37 @@ class Usuario(models.Model):
         self.password = make_password(self.password, clave)
         super().save(**kwargs)
 
-class UsuarioDAO(models.Model):
+class UsuarioManager(models.Manager):
     @classmethod
     def autenticar_usuario(cls, email, password):
-        # Se crea la instancia de DataSource para hacer la conexión
-        data_source = DataSource()
-
-        # Se llama al método ejecutarConsulta para devolver el usuario
-        # que cumple con el email y contraseña recibidos del login
-        data_table = data_source.ejecutar_consulta(
-            "SELECT * FROM usuario WHERE email = %s AND password = %s",
-            (email, password)
-        )
-
-        usuario = None
-
-        # Si data_table contiene una fila, significa que se encontró el usuario en la base de datos
-        if len(data_table) == 1:
-            usuario_data = data_table[0]
-            usuario = cls(
-                idUsuario=usuario_data["idUsuario"],
-                email=usuario_data["email"],
-                password=usuario_data["password"],
-                nombre=usuario_data["nombre"],
-                apellido=usuario_data["apellido"],
-                edad=usuario_data["edad"],
-            )
-
-        return usuario
+        try:
+            # Buscar un usuario por correo y contraseña en la base de datos
+            usuario = get_user_model().objects.get(email=email, password=password)
+            return usuario
+        except get_user_model().DoesNotExist:
+            return None
     
     @classmethod
-    def registrar_usuario(cls, usuario):
-        data_source = DataSource()
-
-        stmt = """
-            INSERT INTO usuario (nombre, apellido, email, password, edad)
-            VALUES (%s, %s, %s, %s, %s)
-        """
-
-        resultado = data_source.ejecutar_actualizacion(
-            stmt,
-            (
-                usuario.email,
-                usuario.password,
-                usuario.nombre,
-                usuario.apellido,  
-                usuario.edad,
-            ),
-        )
-
-        return resultado
+    def registrar_usuario(usuario_data):
+        try:
+            # Crea un nuevo objeto Usuario y guárdalo en la base de datos
+            usuario = Usuario(
+                nombre=usuario_data['nombre'],
+                apellido=usuario_data['apellido'],
+                email=usuario_data['email'],
+                password=usuario_data['password'],
+                edad=usuario_data['edad'],
+            )
+            usuario.save()
+            return usuario
+        except Exception as e:
+            # Manejar cualquier excepción que pueda ocurrir al guardar el usuario
+            # Por ejemplo, manejar la excepción de violación de restricción única en el campo 'email'
+            return None
     
     @classmethod
     def ver_usuarios(cls):
-        data_source = DataSource()
-
-        data_table = data_source.ejecutar_consulta("SELECT * FROM usuario")
-
-        usuarios = []
-
-        for usuario_data in data_table:
-            usuario = cls(
-                idUsuario=usuario_data["idUsuario"],
-                email=usuario_data["email"],
-                password=usuario_data["password"],
-                nombre=usuario_data["nombre"],
-                apellido=usuario_data["apellido"],
-                idGenero=usuario_data["idGenero"],
-            )
-            usuarios.append(usuario)
-
+        # Recuperar todos los usuarios desde la base de datos utilizando el ORM de Django
+        usuarios = cls.get_queryset().all()
         return usuarios
+    
