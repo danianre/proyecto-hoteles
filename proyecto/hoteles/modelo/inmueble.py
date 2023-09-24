@@ -60,3 +60,4 @@ class InmuebleDAO(models.Model):
         # Filtra los inmuebles que tienen todas las características especificadas
         inmuebles = cls.objects.filter(caracteristicas__in=caracteristicas).distinct()
         return inmuebles
+    
