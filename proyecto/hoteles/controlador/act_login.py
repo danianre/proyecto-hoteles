@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from proyecto.hoteles.controlador.mdb.mdbUsuario import autenticar_usuario 
+from proyecto.hoteles.modelo.usuario import UsuarioManager
 
 def login_view(request):
     if request.method == 'POST':
@@ -7,7 +7,7 @@ def login_view(request):
         password = request.POST['password']
         
         # Intenta autenticar al usuario
-        user = autenticar_usuario(email, password)
+        user = UsuarioManager.autenticar_usuario(email, password)
         
         if user is not None:
             # Si el usuario se autentica correctamente, guarda sus datos en la sesión
