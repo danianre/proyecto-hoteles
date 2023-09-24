@@ -33,10 +33,10 @@ class UsuarioManager(models.Manager):
         try:
             # Crea un nuevo objeto Usuario y guárdalo en la base de datos
             usuario = Usuario(
-                nombre=usuario_data['nombre'],
-                apellido=usuario_data['apellido'],
                 email=usuario_data['email'],
                 password=usuario_data['password'],
+                nombre=usuario_data['nombre'],
+                apellido=usuario_data['apellido'],
                 edad=usuario_data['edad'],
             )
             usuario.save()
