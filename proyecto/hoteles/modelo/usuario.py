@@ -88,13 +88,3 @@ class UsuarioDAO(models.Model):
             usuarios.append(usuario)
 
         return usuarios
-    
-    @classmethod
-    def eliminar_usuario(cls, idUsuario):
-        data_source = DataSource()
-
-        stmt = "DELETE FROM usuario WHERE idUsuario = %s"
-
-        resultado = data_source.ejecutar_actualizacion(stmt, (idUsuario,))
-
-        return resultado
