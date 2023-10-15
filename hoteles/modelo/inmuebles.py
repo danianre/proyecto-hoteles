@@ -41,12 +41,6 @@ class InmuebleDAO(models.Model):
         return inmuebles
 
     @classmethod
-    def filtrar_por_ubicacion_y_tipo(cls, ubicacion, tipo_inmueble):
-        # Filtra los inmuebles por ubicación y tipo de inmueble
-        inmuebles = cls.objects.filter(ubicacion=ubicacion, tipo_inmueble=tipo_inmueble)
-        return inmuebles
-    
-    @classmethod
     def filtrar_por_rango_de_precio(cls, precio_min, precio_max):
         # Filtra los inmuebles por un rango de precios (precio_min <= precio <= precio_max)
         inmuebles = cls.objects.filter(precio__gte=precio_min, precio__lte=precio_max)
