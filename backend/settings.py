@@ -137,3 +137,7 @@ INTERNAL_IPS = [
     'localhost',
     '127.0.0.1',
 ]
+
+# Configuración de sesiones
+SESSION_ENGINE = 'django.db.backends.sqlite3'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Cierra la sesión al cerrar el navegador, si es necesario

@@ -4,7 +4,6 @@ from hoteles.modelo.departamentos import Departamentos
 from hoteles.modelo.caracteristicas import Caracteristicas
 from hoteles.modelo.ciudades import Ciudades
 from hoteles.modelo.sectores import Sectores
-from hoteles.modelo.direcciones import Direcciones
 
 
 class Inmuebles(models.Model):
@@ -23,8 +22,8 @@ class Inmuebles(models.Model):
     areaConstruida = models.IntegerField()
     precioAdministracion = models.IntegerField()
     precio = models.IntegerField()
+    direccion = models.CharField(max_length=100)
     idSector = models.ForeignKey(Sectores, on_delete=models.CASCADE)
-    idDireccion = models.ForeignKey(Direcciones, on_delete=models.CASCADE)
     idCiudad = models.ForeignKey(Ciudades, on_delete=models.CASCADE)
     idDepartamento = models.ForeignKey(Departamentos, on_delete=models.CASCADE)
     idPais = models.ForeignKey(Paises, on_delete=models.CASCADE)
