@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from hoteles.modelo.inmuebles import Inmuebles
 
-def ver_inmuebles(request):
+def ver_inmueblesPOST(request):
     if request.method == 'POST':
         # Aquí maneja la lógica del controlador para el método POST
         # Recuperar todos los inmuebles desde la base de datos
@@ -15,7 +15,16 @@ def ver_inmuebles(request):
         # Manejar el caso en el que no se realice una solicitud POST
         # Puedes devolver un error o realizar otra acción aquí
         return JsonResponse({'error': 'Método no permitido'}, status=405)
-    
+
+def ver_inmueblesGET(request):
+    if request.method == 'GET':
+        inmuebles = Inmuebles.objects.all()
+        inmuebles_data = [inmueble.to_dict() for inmueble in inmuebles]
+        return JsonResponse({'inmuebles': inmuebles_data})
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+
 
 def filtrar_inmuebles_por_precio(request):
     if request.method == 'POST':
