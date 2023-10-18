@@ -12,11 +12,11 @@ def autenticar_usuario(request):
             password = request.POST.get('password')
 
             # Buscar un usuario por correo y contraseña en la base de datos
-            User = get_user_model()
-            User.objects.get(email=email, password=password)
-            # Aquí puedes realizar cualquier acción adicional si el usuario se autentica exitosamente
+            Usuario = get_user_model()
+            Usuario.objects.get(email=email, password=password)
+            # Aquí se puede realizar cualquier acción adicional si el usuario se autentica exitosamente
             return JsonResponse({'message': 'Usuario autenticado exitosamente'})
-        except User.DoesNotExist:
+        except Usuario.DoesNotExist:
             # Manejar el caso en el que el usuario no se encuentre en la base de datos o la autenticación sea incorrecta
             return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
     else:
@@ -57,29 +57,25 @@ def registrar_usuario(request):
         # Puedes devolver un error o realizar otra acción aquí
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-def ver_usuariosGET(request):
-    if request.method == 'GET':
-        # Recuperar todos los usuarios desde la base de datos utilizando el ORM de Django
-        usuarios = Usuarios.objects.all()
-        usuarios_data = [{'id': usuario.idUsuario, 'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'edad': usuario.edad} for usuario in usuarios]
-        return JsonResponse({'usuarios': usuarios_data})
-    else:
-        # Manejar el caso en el que no se realice una solicitud GET
-        # Puedes devolver un error o realizar otra acción aquí
-        return JsonResponse({'error': 'Método no permitido'}, status=405)
+# def ver_usuariosGET(request):
+#     if request.method == 'GET':
+#         # Recuperar todos los usuarios desde la base de datos utilizando el ORM de Django
+#         usuarios = Usuarios.objects.all()
+#         usuarios_data = [{'id': usuario.idUsuario, 'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'edad': usuario.edad} for usuario in usuarios]
+#         return JsonResponse({'usuarios': usuarios_data})
+#     else:
+#         # Manejar el caso en el que no se realice una solicitud GET
+#         # Puedes devolver un error o realizar otra acción aquí
+#         return JsonResponse({'error': 'Método no permitido'}, status=405)
     
 
 def ver_usuariosPOST(request):
     if request.method == 'POST':
-        # Realiza alguna lógica específica para manejar la solicitud POST
-        # Puedes realizar consultas personalizadas o procesar datos aquí
-        # En este ejemplo, simplemente recuperaremos todos los usuarios y los devolveremos en formato JSON
+        # Recuperaremos todos los usuarios y los devolveremos en formato JSON
         usuarios = Usuarios.objects.all()
-        usuarios_data = [{'id': usuario.id, 'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'edad': usuario.edad} for usuario in usuarios]
+        usuarios_data = [{'id': usuario.idUsuario, 'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'edad': usuario.edad} for usuario in usuarios]
         return JsonResponse({'usuarios': usuarios_data})
     else:
-        # Manejar el caso en el que no se realice una solicitud POST
-        # Puedes devolver un error o realizar otra acción aquí
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 
