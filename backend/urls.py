@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
-from hoteles.controlador.Usuarios import registrar_usuario
+from hoteles.controlador.UsuariosPOST import registrar_usuario
 
 
 urlpatterns = [
