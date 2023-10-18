@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom"
+
+const logogid = 'logogid.png'
+const logogidPath = `./static/${logogid}`
+
 function Login(){
     return(
         <>
@@ -7,7 +11,7 @@ function Login(){
             </div>
             <div className="grid-el login-content">
                 <div className="login-content-logo">
-                    <img src="/public/logogid.png" alt="logo" />
+                    <img src={logogidPath} alt="logo" />
                     <h1>Welcome!</h1>
                 </div>
                 <div className="login-content-form">

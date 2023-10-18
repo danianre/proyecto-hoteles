@@ -1,18 +1,25 @@
-import MayFindCard from './MayFindCard/MayFindCard'
-import Products from '../../data/Products.json'
-function MayFindSect() {
+import React from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
+
+function MayFindCard(props) {
+
+  useEffect(()=>{
+    AOS.init({duration:1000});
+  },[])
+
   return (
-    <div className='mayfind-container'>
-        <div>
-          <h2 style={{textAlign:"center", marginBottom:"20px", fontSize:"58px"}}>En nuestro sitio encontrarás...</h2>
-            <div className="mayfind-container-content">
-                {Products.map((getProduct, index)=>(
-                    <MayFindCard product={getProduct} key={index}/>
-                ))}
-            </div>
+    <div className='mayfindcard-container' data-aos='fade-up'>
+        <div className="mayfindcard-img">
+          {/* <img src={props.product.imagen} alt="img-card" /> */}
         </div>
+        <div className="mayfindcard-desc">
+          <p>{props.product.producto}</p>
+          <p>{props.product.desc}</p>
+          </div>
     </div>
   )
 }
 
-export default MayFindSect
+export default MayFindCard

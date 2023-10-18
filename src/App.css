@@ -45,7 +45,7 @@ ul>li:hover{
 
 .hero_container{
   height: 80vh;
-  background-image: url("./public/heroimage4.jpg");
+  background-image: url("/static/heroimage4.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -157,7 +157,7 @@ ul>li:hover{
 }
 
 .login-image{
-  background-image: url("./public/loginImage.jpg");
+  background-image: url("/static/loginImage.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   -webkit-border-radius: 10px;
@@ -203,8 +203,8 @@ ul>li:hover{
 .sigup-container{
   display: flex;
   flex-direction: column;
-  width: 40vw;
-  height: 60vh;
+  width: 40%;
+  height: 85%;
   border-radius: 10px;
   position: absolute;
   top: 50%;
@@ -248,12 +248,12 @@ ul>li:hover{
 }
 
 .personal-info > #email-sign, #name-sign, #passw-sign{
-  padding: 18px;
+  padding: 10px;
   border-radius: 10px;
   border: none;
   width: 100%;
-  margin-top: 18px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 

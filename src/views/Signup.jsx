@@ -30,8 +30,6 @@ function Signup() {
 
   }
 
-
-
   const [index, setIndex] = useState(0);
 
   const tilteForm = ["Personal Info", "Location", "Interests"];
