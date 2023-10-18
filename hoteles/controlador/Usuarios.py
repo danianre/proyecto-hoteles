@@ -4,23 +4,23 @@ from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
 
 
-@require_POST
-def autenticar_usuario(request):
-    if request.method == 'POST':
-        try:
-            email = request.POST.get('email')
-            password = request.POST.get('password')
+# @require_POST
+# def autenticar_usuario(request):
+#     if request.method == 'POST':
+#         try:
+#             email = request.POST.get('email')
+#             password = request.POST.get('password')
 
-            # Buscar un usuario por correo y contraseña en la base de datos
-            Usuario = get_user_model()
-            Usuario.objects.get(email=email, password=password)
-            # Aquí se puede realizar cualquier acción adicional si el usuario se autentica exitosamente
-            return JsonResponse({'message': 'Usuario autenticado exitosamente'})
-        except Usuario.DoesNotExist:
-            # Manejar el caso en el que el usuario no se encuentre en la base de datos o la autenticación sea incorrecta
-            return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
-    else:
-        return JsonResponse({'error': 'Método no permitido'}, status=405)
+#             # Buscar un usuario por correo y contraseña en la base de datos
+#             Usuario = get_user_model()
+#             Usuario.objects.get(email=email, password=password)
+#             # Aquí se puede realizar cualquier acción adicional si el usuario se autentica exitosamente
+#             return JsonResponse({'message': 'Usuario autenticado exitosamente'})
+#         except Usuario.DoesNotExist:
+#             # Manejar el caso en el que el usuario no se encuentre en la base de datos o la autenticación sea incorrecta
+#             return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
+#     else:
+#         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 def registrar_usuario(request):
     if request.method == 'POST':
