@@ -64,26 +64,27 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'sql_server.pyodbc',
+       'NAME': 'BaseDeDatosInmobiliaria',
+       'USER': 'administrador',
+       'PASSWORD': 'BD_semillero_2023',
+       'HOST': 'server-bds.database.windows.net',
+       'PORT': '1433',
+       'OPTIONS': {
+           'driver': 'ODBC Driver 18 for SQL Server',
+       },
+   },
 }
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'sql_server.pyodbc',
-#        'NAME': 'BaseDeDatosInmobiliaria',
-#        'USER': 'administrador',
-#        'PASSWORD': 'BD_semillero_2023',
-#        'HOST': 'server-bds.database.windows.net',
-#        'PORT': '1433',
-#        'OPTIONS': {
-#            'driver': 'ODBC Driver 18 for SQL Server',
-#        },
-#    },
-#}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -139,5 +140,5 @@ INTERNAL_IPS = [
 ]
 
 # Configuración de sesiones
-SESSION_ENGINE = 'django.db.backends.sqlite3'
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Cierra la sesión al cerrar el navegador, si es necesario
+# SESSION_ENGINE = 'django.db.backends.sqlite3'
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Cierra la sesión al cerrar el navegador, si es necesario
