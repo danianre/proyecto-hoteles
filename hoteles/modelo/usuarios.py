@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import check_password
 
 
 class Usuarios(models.Model):
     idUsuario = models.BigAutoField(primary_key=True)
     email = models.CharField(max_length = 30, unique = True)
-    password = models.CharField(max_length = 255)
+    password = models.CharField(max_length=255)
     nombre = models.CharField(max_length=255)
     apellido = models.CharField(max_length=255)
     edad = models.PositiveIntegerField()
@@ -19,11 +20,12 @@ class Usuarios(models.Model):
 
 class UsuarioManager(models.Manager):
     @classmethod
-    def autenticar_usuario(email, password):
+    def autenticar_usuario(cls, email, password):
         try:
-            # Buscar un usuario por correo y contraseña en la base de datos
-            usuario = get_user_model().objects.get(email=email, password=password)
-            return usuario
+            # Buscar un usuario por correo en la base de datos
+            usuario = cls.get_queryset().get(email=email)
+            if check_password(password, usuario.password):
+                return usuario
         except get_user_model().DoesNotExist:
             return None
     
