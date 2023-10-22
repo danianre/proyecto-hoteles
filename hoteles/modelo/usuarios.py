@@ -19,7 +19,7 @@ class Usuarios(models.Model):
 
 class UsuarioManager(models.Manager):
     @classmethod
-    def autenticar_usuario(cls, email, password):
+    def autenticar_usuario(email, password):
         try:
             # Buscar un usuario por correo y contraseña en la base de datos
             usuario = get_user_model().objects.get(email=email, password=password)
