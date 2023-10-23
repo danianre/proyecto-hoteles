@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\dania\django-react2"
+@set "VIRTUAL_ENV=C:\Users\dania\proyecto-hoteles"
 
 @if defined _OLD_VIRTUAL_PROMPT (
     @set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
