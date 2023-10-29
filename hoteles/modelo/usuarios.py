@@ -18,8 +18,7 @@ class Usuarios(models.Model):
         self.password = make_password(self.password, clave)
         super().save(**kwargs)
 
-class UsuarioManager(models.Manager):
-    @classmethod
+    
     def autenticar_usuario(cls, email, password):
         try:
             # Buscar un usuario por correo en la base de datos
@@ -29,11 +28,11 @@ class UsuarioManager(models.Manager):
         except get_user_model().DoesNotExist:
             return None
     
-    @classmethod
-    def registrar_usuario(usuario_data):
+    
+    def registrar_usuario(cls,usuario_data):
         try:
             # Crea un nuevo objeto Usuario y guárdalo en la base de datos
-            usuario = Usuarios(
+            usuario = cls(
                 email=usuario_data['email'],
                 password=usuario_data['password'],
                 nombre=usuario_data['nombre'],
@@ -47,7 +46,7 @@ class UsuarioManager(models.Manager):
             # Por ejemplo, manejar la excepción de violación de restricción única en el campo 'email'
             return None
     
-    @classmethod
+    
     def ver_usuarios(cls):
         # Recuperar todos los usuarios desde la base de datos utilizando el ORM de Django
         usuarios = cls.get_queryset().all()

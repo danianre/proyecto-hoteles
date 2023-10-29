@@ -22,39 +22,50 @@ class Inmuebles(models.Model):
     areaConstruida = models.IntegerField()
     precioAdministracion = models.IntegerField()
     precio = models.IntegerField()
-    direccion = models.CharField(max_length=100)
-    idSector = models.ForeignKey(Sectores, on_delete=models.CASCADE)
     idCiudad = models.ForeignKey(Ciudades, on_delete=models.CASCADE)
     idDepartamento = models.ForeignKey(Departamentos, on_delete=models.CASCADE)
+    direccion = models.CharField(max_length=100)
     idPais = models.ForeignKey(Paises, on_delete=models.CASCADE)
-    caracteristicas = models.ManyToManyField(Caracteristicas)
+    idSector = models.ForeignKey(Sectores, on_delete=models.CASCADE)
+    # caracteristica = models.ManyToManyField(Caracteristicas)
 
     def __str__(self):
         return self.nombre
     
 
-class InmuebleDAO(models.Model):
-    @classmethod
     def ver_inmuebles(cls):
         # Recuperar todos los inmuebles desde la base de datos
         inmuebles = Inmuebles.objects.all()
         return inmuebles
 
-    @classmethod
-    def filtrar_por_rango_de_precio(cls, precio_min, precio_max):
-        # Filtra los inmuebles por un rango de precios (precio_min <= precio <= precio_max)
-        inmuebles = cls.objects.filter(precio__gte=precio_min, precio__lte=precio_max)
-        return inmuebles
-    
-    @classmethod
-    def filtrar_por_antiguedad(cls, antiguedad):
-        # Filtra los inmuebles por antiguedad
-        inmuebles = cls.objects.filter(antiguedad=antiguedad)
-        return inmuebles
-    
-    @classmethod
     def filtrar_por_caracteristicas(cls, caracteristicas):
         # Filtra los inmuebles que tienen todas las características especificadas
         inmuebles = cls.objects.filter(caracteristicas__in=caracteristicas).distinct()
         return inmuebles
     
+    
+    def crear_inmueble(cls, nombre, descripcion, estrato, cantidadDeHabitantes, cantidadDeBaños, cantidadDeParqueaderos, piso, antiguedad, estado, url, areaPrivada, areaConstruida, precioAdministracion, precio, direccion, idSector, idCiudad, idDepartamento, idPais, caracteristicas):
+        inmueble = cls(
+            nombre=nombre,
+            descripcion=descripcion,
+            estrato=estrato,
+            cantidadDeHabitantes=cantidadDeHabitantes,
+            cantidadDeBaños=cantidadDeBaños,
+            cantidadDeParqueaderos=cantidadDeParqueaderos,
+            piso=piso,
+            antiguedad=antiguedad,
+            estado=estado,
+            url=url,
+            areaPrivada=areaPrivada,
+            areaConstruida=areaConstruida,
+            precioAdministracion=precioAdministracion,
+            precio=precio,
+            direccion=direccion,
+            idSector=idSector,
+            idCiudad=idCiudad,
+            idDepartamento=idDepartamento,
+            idPais=idPais,
+        )
+        inmueble.save()
+        # inmueble.caracteristica.set(caracteristica)
+        return inmueble
