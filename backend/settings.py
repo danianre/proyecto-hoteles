@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+i0%k2)az!l&yz!q_lak4r#dbnb0p#k&bth4=(*e36d4(^#bxq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -46,7 +46,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "html"],
+        'DIRS': [BASE_DIR / "html"],  # Esta línea indica la ubicación de la carpeta 'html'
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Otros backends de autenticación si los estás utilizando
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -139,22 +144,3 @@ INTERNAL_IPS = [
     'localhost',
     '127.0.0.1',
 ]
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'ERROR',
-#             'class': 'logging.FileHandler',
-#             'filename': os.path.join(BASE_DIR, 'error.log'),
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'ERROR',
-#             'propagate': True,
-#         },
-#     },
-# }
