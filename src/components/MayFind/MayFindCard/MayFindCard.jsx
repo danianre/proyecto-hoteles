@@ -12,7 +12,7 @@ function MayFindCard(props) {
   return (
     <div className='mayfindcard-container' data-aos='fade-up'>
         <div className="mayfindcard-img">
-          {/* <img src={props.product.imagen} alt="img-card" /> */}
+          <img src={props.product.imagen} alt="img-card" />
         </div>
         <div className="mayfindcard-desc">
           <p>{props.product.producto}</p>
